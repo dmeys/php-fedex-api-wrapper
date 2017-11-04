@@ -8,6 +8,7 @@
 - Updated Rate Service
 - Updated Track Service
 - Updated Locations Service
+- Updated Rate Service to version 22.
 
 |Service|Version|
 |---|---|
@@ -20,7 +21,11 @@
 |Rate|22|
 |Return Tag|1|
 |Ship|21|
+<<<<<<< HEAD
 |Track|14|
+=======
+|Track|5|
+>>>>>>> dd700d0... Updated Rate Service to version 22.
 |Upload Document|11|
 |Open Ship|11|
 |Validation Availability and Commitment Service|6|

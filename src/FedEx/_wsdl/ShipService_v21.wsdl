@@ -5652,6 +5652,9 @@
   <message name="ProcessShipmentReply">
     <part name="ProcessShipmentReply" element="ns:ProcessShipmentReply"/>
   </message>
+  <message name="CreatePendingShipmentRequest">
+    <part name="CreatePendingShipmentRequest" element="ns:CreatePendingShipmentRequest"/>
+  </message>
   <message name="ProcessTagRequest">
     <part name="ProcessTagRequest" element="ns:ProcessTagRequest"/>
   </message>
@@ -5673,7 +5676,14 @@
   <message name="ValidateShipmentRequest">
     <part name="ValidateShipmentRequest" element="ns:ValidateShipmentRequest"/>
   </message>
+  <message name="CreatePendingShipmentReply">
+    <part name="CreatePendingShipmentReply" element="ns:CreatePendingShipmentReply"/>
+  </message>
   <portType name="ShipPortType">
+    <operation name="createPendingShipment" parameterOrder="CreatePendingShipmentRequest">
+      <input message="ns:CreatePendingShipmentRequest"/>
+      <output message="ns:CreatePendingShipmentReply"/>
+    </operation>
     <operation name="processTag" parameterOrder="ProcessTagRequest">
       <input message="ns:ProcessTagRequest"/>
       <output message="ns:ProcessTagReply"/>
@@ -5697,6 +5707,15 @@
   </portType>
   <binding name="ShipServiceSoapBinding" type="ns:ShipPortType">
     <s1:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="createPendingShipment">
+      <s1:operation soapAction="http://fedex.com/ws/ship/v12/createPendingShipment" style="document"/>
+      <input>
+        <s1:body use="literal"/>
+      </input>
+      <output>
+        <s1:body use="literal"/>
+      </output>
+    </operation>
     <operation name="processTag">
       <s1:operation soapAction="http://fedex.com/ws/ship/v21/processTag" style="document"/>
       <input>

@@ -3,6 +3,8 @@
     <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://fedex.com/ws/ship/v21">
       <xs:element name="DeleteShipmentRequest" type="ns:DeleteShipmentRequest"/>
       <xs:element name="DeleteTagRequest" type="ns:DeleteTagRequest"/>
+      <xs:element name="CreatePendingShipmentReply" type="ns:CreatePendingShipmentReply"/>
+      <xs:element name="CreatePendingShipmentRequest" type="ns:CreatePendingShipmentRequest"/>
       <xs:element name="ProcessShipmentReply" type="ns:ProcessShipmentReply"/>
       <xs:element name="ProcessShipmentRequest" type="ns:ProcessShipmentRequest"/>
       <xs:element name="ProcessTagReply" type="ns:ProcessTagReply"/>
@@ -1520,6 +1522,70 @@
           <xs:enumeration value="LEGACY"/>
         </xs:restriction>
       </xs:simpleType>
+      <xs:complexType name="CreatePendingShipmentReply">
+        <xs:annotation>
+          <xs:documentation>Reply to the Close Request transaction. The Close Reply bring back the ASCII data buffer which will be used to print the Close Manifest. The Manifest is essential at the time of pickup.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+          <xs:element name="HighestSeverity" type="ns:NotificationSeverityType" minOccurs="1">
+            <xs:annotation>
+              <xs:documentation>Identifies the highest severity encountered when executing the request; in order from high to low: FAILURE, ERROR, WARNING, NOTE, SUCCESS.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="Notifications" type="ns:Notification" minOccurs="1" maxOccurs="unbounded">
+            <xs:annotation>
+              <xs:documentation>The descriptive data detailing the status of a sumbitted transaction.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="TransactionDetail" type="ns:TransactionDetail" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation>Descriptive data that governs data payload language/translations. The TransactionDetail from the request is echoed back to the caller in the corresponding reply.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="Version" type="ns:VersionId" minOccurs="1">
+            <xs:annotation>
+              <xs:documentation>Identifies the version/level of a service operation expected by a caller (in each request) and performed by the callee (in each reply).</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="CompletedShipmentDetail" type="ns:CompletedShipmentDetail" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation>The reply payload. All of the returned information about this shipment/package.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="CreatePendingShipmentRequest">
+        <xs:annotation>
+          <xs:documentation>Create Pending Shipment Request</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+          <xs:element name="WebAuthenticationDetail" type="ns:WebAuthenticationDetail" minOccurs="1">
+            <xs:annotation>
+              <xs:documentation>Descriptive data to be used in authentication of the sender's identity (and right to use FedEx web services).</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="ClientDetail" type="ns:ClientDetail" minOccurs="1">
+            <xs:annotation>
+              <xs:documentation>The descriptive data identifying the client submitting the transaction.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="TransactionDetail" type="ns:TransactionDetail" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation>The descriptive data for this customer transaction. The TransactionDetail from the request is echoed back to the caller in the corresponding reply.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="Version" type="ns:VersionId" minOccurs="1">
+            <xs:annotation>
+              <xs:documentation>Identifies the version/level of a service operation expected by a caller (in each request) and performed by the callee (in each reply).</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="RequestedShipment" type="ns:RequestedShipment" minOccurs="1">
+            <xs:annotation>
+              <xs:documentation>Descriptive data about the shipment being sent by the requestor.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
       <xs:complexType name="DeliveryOnInvoiceAcceptanceDetail">
         <xs:sequence>
           <xs:element name="Recipient" type="ns:Party" minOccurs="0"/>

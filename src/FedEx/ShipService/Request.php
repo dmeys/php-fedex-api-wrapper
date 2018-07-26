@@ -16,6 +16,25 @@ class Request extends AbstractRequest
     const TESTING_URL = 'https://wsbeta.fedex.com:443/web-services/ship';
 
     protected static $wsdlFileName = 'ShipService_v21.wsdl';
+    
+    /**
+     * Sends the CreatePendingShipmentRequest and returns the response
+     *
+     * @param ComplexType\CreatePendingShipmentRequest $createPendingShipmentRequest
+     * @param bool $returnStdClass Return the $stdClass response directly from \SoapClient
+     * @return ComplexType\CreatePendingShipmentReply|stdClass
+     */
+    public function getCreatePendingShipmentReply(ComplexType\CreatePendingShipmentRequest $createPendingShipmentRequest, $returnStdClass = false)
+    {
+        $response = $this->getSoapClient()->createPendingShipment($createPendingShipmentRequest->toArray());
+        if ($returnStdClass) {
+            return $response;
+        }
+        
+        $createPendingShipmentReply = new ComplexType\CreatePendingShipmentReply;
+        $createPendingShipmentReply->populateFromStdClass($response);
+        return $createPendingShipmentReply;
+    }
             
     /**
      * Sends the ProcessTagRequest and returns the response

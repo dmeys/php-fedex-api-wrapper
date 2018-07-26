@@ -5708,7 +5708,7 @@
   <binding name="ShipServiceSoapBinding" type="ns:ShipPortType">
     <s1:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
     <operation name="createPendingShipment">
-      <s1:operation soapAction="http://fedex.com/ws/ship/v12/createPendingShipment" style="document"/>
+      <s1:operation soapAction="http://fedex.com/ws/ship/v21/createPendingShipment" style="document"/>
       <input>
         <s1:body use="literal"/>
       </input>
